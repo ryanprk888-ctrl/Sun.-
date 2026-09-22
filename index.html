@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Para Sun ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#020005;
+}
+
+body{
+    position:relative;
+    font-family:'Cormorant Garamond',serif;
+    color:#ffe8f7;
+}
+
+/* =========================================================
+   FONDO
+========================================================= */
+
+.space{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    background:
+        radial-gradient(
+            ellipse at center,
+            #180b1b 0%,
+            #08030b 42%,
+            #020005 78%,
+            #000 100%
+        );
+}
+
+.space::before{
+    content:"";
+    position:absolute;
+    inset:-20%;
+    background:
+        radial-gradient(
+            ellipse at 25% 35%,
+            rgba(255,65,170,.12),
+            transparent 30%
+        ),
+        radial-gradient(
+            ellipse at 78% 65%,
+            rgba(180,65,255,.10),
+            transparent 32%
+        );
+    filter:blur(45px);
+    animation:nebula 14s ease-in-out infinite alternate;
+}
+
+@keyframes nebula{
+    from{
+        transform:scale(1) rotate(0deg);
+    }
+    to{
+        transform:scale(1.15) rotate(4deg);
+    }
+}
+
+/* =========================================================
+   ESTRELLAS
+========================================================= */
+
+.stars,
+.stars::before,
+.stars::after{
+    position:absolute;
+    inset:0;
+    content:"";
+    background-repeat:repeat;
+}
+
+.stars{
+    opacity:.8;
+    background-image:
+        radial-gradient(circle,rgba(255,255,255,.9) 0 1px,transparent 1.5px),
+        radial-gradient(circle,rgba(255,151,220,.8) 0 1px,transparent 1.5px);
+    background-size:
+        97px 113px,
+        173px 157px;
+    animation:starsMove 90s linear infinite;
+}
+
+.stars::before{
+    opacity:.55;
+    background-image:
+        radial-gradient(circle,white 0 1px,transparent 1.5px);
+    background-size:137px 191px;
+    animation:starsMove 55s linear infinite reverse;
+}
+
+.stars::after{
+    opacity:.35;
+    background-image:
+        radial-gradient(circle,#ff9bd8 0 1.2px,transparent 1.8px);
+    background-size:223px 177px;
+    animation:starsMove 120s linear infinite;
+}
+
+@keyframes starsMove{
+    from{
+        transform:translate3d(0,0,0);
+    }
+    to{
+        transform:translate3d(-120px,80px,0);
+    }
+}
+
+/* =========================================================
+   CANVAS
+========================================================= */
+
+canvas{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+}
+
+/* =========================================================
+   BRILLO CENTRAL
+========================================================= */
+
+.glow{
+    position:absolute;
+    width:min(70vw,850px);
+    height:min(70vw,850px);
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,77,181,.09) 0%,
+            rgba(255,52,166,.035) 32%,
+            transparent 70%
+        );
+
+    filter:blur(20px);
+    animation:glowPulse 5s ease-in-out infinite;
+}
+
+@keyframes glowPulse{
+    0%,100%{
+        transform:translate(-50%,-50%) scale(.94);
+        opacity:.7;
+    }
+
+    50%{
+        transform:translate(-50%,-50%) scale(1.06);
+        opacity:1;
+    }
+}
+
+/* =========================================================
+   MENSAJE
+========================================================= */
+
+.message-container{
+    position:absolute;
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%)
+        translate3d(
+            var(--mx,0px),
+            var(--my,0px),
+            0
+        );
+
+    width:min(470px,78vw);
+
+    text-align:center;
+
+    z-index:10;
+
+    transition:
+        transform 1.5s cubic-bezier(.2,.8,.2,1);
+}
+
+.message{
+    position:relative;
+
+    padding:38px 28px 30px;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(5,0,10,.50),
+            rgba(5,0,10,.10)
+        );
+
+    border-radius:50%;
+
+    text-shadow:
+        0 0 5px rgba(255,173,224,.85),
+        0 0 18px rgba(255,74,181,.35);
+
+    animation:
+        messageFloat 6s ease-in-out infinite;
+}
+
+@keyframes messageFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-5px);
+    }
+}
+
+.message::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,85,185,.08),
+            transparent 68%
+        );
+
+    filter:blur(18px);
+    z-index:-1;
+}
+
+.text{
+    font-size:clamp(19px,3vw,27px);
+    line-height:1.55;
+    font-weight:400;
+    letter-spacing:.2px;
+}
+
+.text span{
+    display:block;
+
+    opacity:0;
+
+    transform:translateY(12px);
+
+    animation:
+        textAppear 1.2s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+.text span:nth-child(1){animation-delay:.4s}
+.text span:nth-child(2){animation-delay:.7s}
+.text span:nth-child(3){animation-delay:1s}
+.text span:nth-child(4){animation-delay:1.3s}
+.text span:nth-child(5){animation-delay:1.6s}
+.text span:nth-child(6){animation-delay:1.9s}
+
+@keyframes textAppear{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================================================
+   ORNAMENTO
+========================================================= */
+
+.heart-symbol{
+    margin-top:20px;
+
+    font-family:serif;
+    font-size:32px;
+
+    color:#ff9bd5;
+
+    text-shadow:
+        0 0 8px #ff52b8,
+        0 0 22px rgba(255,67,180,.8);
+
+    animation:
+        tinyHeart 2.5s ease-in-out infinite;
+}
+
+@keyframes tinyHeart{
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.16);
+    }
+}
+
+/* =========================================================
+   ÓRBITAS
+========================================================= */
+
+.orbit{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:min(74vw,820px);
+    height:min(38vw,430px);
+
+    border:1px solid rgba(255,119,204,.18);
+
+    border-radius:50%;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(-18deg);
+
+    box-shadow:
+        0 0 20px rgba(255,83,188,.04);
+
+    pointer-events:none;
+}
+
+.orbit:nth-of-type(2){
+    transform:
+        translate(-50%,-50%)
+        rotate(58deg);
+
+    width:min(67vw,740px);
+    height:min(31vw,350px);
+
+    border-color:rgba(197,116,255,.13);
+}
+
+.orbit-dot{
+    position:absolute;
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#ffd4ed;
+
+    box-shadow:
+        0 0 7px #fff,
+        0 0 18px #ff5bb9,
+        0 0 30px #ff3faa;
+
+    top:-3px;
+    left:50%;
+
+    animation:
+        orbitDot 8s linear infinite;
+}
+
+.orbit:nth-of-type(2) .orbit-dot{
+    animation-duration:11s;
+}
+
+@keyframes orbitDot{
+    from{
+        transform:rotate(0deg) translateX(50%);
+    }
+
+    to{
+        transform:rotate(360deg) translateX(50%);
+    }
+}
+
+/* =========================================================
+   LÍNEAS DECORATIVAS
+========================================================= */
+
+.decor{
+    position:absolute;
+    left:50%;
+    top:50%;
+
+    width:min(78vw,600px);
+
+    transform:translate(-50%,calc(-50% + 175px));
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:13px;
+
+    opacity:.7;
+}
+
+.decor-line{
+    width:55px;
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,142,211,.8),
+            transparent
+        );
+
+    box-shadow:0 0 8px rgba(255,79,183,.5);
+}
+
+.decor-star{
+    color:#ffb6df;
+    font-size:12px;
+
+    text-shadow:
+        0 0 8px #ff61bb;
+}
+
+/* =========================================================
+   ESQUINAS
+========================================================= */
+
+.corner{
+    position:absolute;
+    width:100px;
+    height:100px;
+    opacity:.35;
+    pointer-events:none;
+}
+
+.corner::before,
+.corner::after{
+    content:"";
+    position:absolute;
+    background:#ff73bd;
+}
+
+.corner::before{
+    width:100%;
+    height:1px;
+    top:0;
+}
+
+.corner::after{
+    width:1px;
+    height:100%;
+    left:0;
+}
+
+.corner.one{
+    top:25px;
+    left:25px;
+}
+
+.corner.two{
+    bottom:25px;
+    right:25px;
+    transform:rotate(180deg);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:600px){
+
+    .message-container{
+        width:84vw;
+    }
+
+    .message{
+        padding:25px 15px;
+    }
+
+    .text{
+        font-size:18px;
+        line-height:1.55;
+    }
+
+    .orbit{
+        width:115vw;
+        height:62vw;
+    }
+
+    .orbit:nth-of-type(2){
+        width:105vw;
+        height:54vw;
+    }
+
+    .decor{
+        transform:
+            translate(-50%,calc(-50% + 145px));
+    }
+
+    .decor-line{
+        width:35px;
+    }
+}
+
+@media(max-height:650px){
+
+    .message{
+        padding:15px 20px;
+    }
+
+    .text{
+        font-size:17px;
+        line-height:1.4;
+    }
+
+    .heart-symbol{
+        margin-top:10px;
+        font-size:25px;
+    }
+
+    .decor{
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="space">
+
+    <div class="stars"></div>
+
+    <div class="glow"></div>
+
+    <canvas id="galaxy"></canvas>
+
+    <div class="orbit">
+        <div class="orbit-dot"></div>
+    </div>
+
+    <div class="orbit">
+        <div class="orbit-dot"></div>
+    </div>
+
+    <div class="message-container" id="message">
+
+        <div class="message">
+
+            <div class="text">
+
+                <span>Sun, sos mi mejor amigo virtual,</span>
+
+                <span>te adoro, tenés un lugar en mi vida</span>
+
+                <span>sin importar si estás detrás de una pantalla,</span>
+
+                <span>sos esa persona que no quiero perder nunca,</span>
+
+                <span>que quiero conservar en mi vida siempre,</span>
+
+                <span>te quiero mucho.</span>
+
+            </div>
+
+            <div class="heart-symbol">♡</div>
+
+        </div>
+
+    </div>
+
+    <div class="decor">
+        <div class="decor-line"></div>
+        <div class="decor-star">✦</div>
+        <div class="decor-line"></div>
+    </div>
+
+    <div class="corner one"></div>
+    <div class="corner two"></div>
+
+</div>
+
+<script>
+
+/* =========================================================
+   GALAXIA EN FORMA DE CORAZÓN
+========================================================= */
+
+const canvas = document.getElementById("galaxy");
+const ctx = canvas.getContext("2d");
+
+let width;
+let height;
+let dpr;
+
+const particles = [];
+
+const PARTICLE_COUNT = 1450;
+
+let mouseX = 0;
+let mouseY = 0;
+
+let smoothX = 0;
+let smoothY = 0;
+
+
+/* ---------------------------------------------------------
+   RESIZE
+--------------------------------------------------------- */
+
+function resize(){
+
+    dpr = Math.min(window.devicePixelRatio || 1,2);
+
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+
+window.addEventListener("resize",resize);
+
+resize();
+
+
+/* ---------------------------------------------------------
+   CORAZÓN MATEMÁTICO
+--------------------------------------------------------- */
+
+function heart(t){
+
+    const x =
+        16 *
+        Math.pow(Math.sin(t),3);
+
+    const y =
+        -(
+            13 * Math.cos(t)
+            -5 * Math.cos(2*t)
+            -2 * Math.cos(3*t)
+            -Math.cos(4*t)
+        );
+
+    return {x,y};
+}
+
+
+/* ---------------------------------------------------------
+   CREAR PARTÍCULAS
+--------------------------------------------------------- */
+
+for(let i=0;i<PARTICLE_COUNT;i++){
+
+    const angle =
+        Math.random() * Math.PI * 2;
+
+    const heartPoint =
+        heart(angle);
+
+    /*
+       La mayor cantidad de partículas
+       se concentra cerca de los bordes
+       del corazón.
+    */
+
+    const spread =
+        Math.pow(Math.random(),2);
+
+    const radius =
+        (Math.random()-.5)
+        * (3 + spread * 17);
+
+    const arm =
+        Math.random() < .5 ? -1 : 1;
+
+    particles.push({
+
+        angle,
+
+        radius,
+
+        arm,
+
+        size:
+            Math.random() * 1.35 + .2,
+
+        alpha:
+            Math.random() * .75 + .15,
+
+        speed:
+            (Math.random()-.5)
+            * .00045,
+
+        offset:
+            Math.random()*100,
+
+        hue:
+            Math.random(),
+
+        twinkle:
+            Math.random()*Math.PI*2
+
+    });
+}
+
+
+/* ---------------------------------------------------------
+   DIBUJAR
+--------------------------------------------------------- */
+
+let time = 0;
+
+function draw(){
+
+    time += 1;
+
+    ctx.clearRect(0,0,width,height);
+
+    /*
+       Desplazamiento por mouse
+    */
+
+    smoothX +=
+        (mouseX-smoothX)*.025;
+
+    smoothY +=
+        (mouseY-smoothY)*.025;
+
+
+    const scale =
+        Math.min(width,height) * .0205;
+
+
+    const centerX =
+        width/2 + smoothX*.018;
+
+    const centerY =
+        height/2 + smoothY*.018;
+
+
+    /*
+       Halo rosa detrás de la galaxia
+    */
+
+    const halo =
+        ctx.createRadialGradient(
+            centerX,
+            centerY,
+            10,
+            centerX,
+            centerY,
+            Math.min(width,height)*.43
+        );
+
+    halo.addColorStop(
+        0,
+        "rgba(255,75,182,.08)"
+    );
+
+    halo.addColorStop(
+        .45,
+        "rgba(255,53,172,.025)"
+    );
+
+    halo.addColorStop(
+        1,
+        "transparent"
+    );
+
+    ctx.fillStyle = halo;
+
+    ctx.fillRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    /*
+       Partículas
+    */
+
+    ctx.globalCompositeOperation =
+        "lighter";
+
+
+    for(const p of particles){
+
+        p.angle += p.speed;
+
+        const h =
+            heart(p.angle);
+
+        /*
+           Convierte la partícula
+           en una pequeña espiral.
+        */
+
+        const spiral =
+            p.radius
+            + Math.sin(
+                time*.008 +
+                p.offset
+            )*.8;
+
+        const rotation =
+            p.angle +
+            spiral*.025*p.arm;
+
+
+        const x =
+            centerX +
+            (h.x * scale) +
+            Math.cos(rotation)
+            * spiral;
+
+
+        const y =
+            centerY +
+            (h.y * scale) +
+            Math.sin(rotation)
+            * spiral;
+
+
+        /*
+           Movimiento sutil de la galaxia
+        */
+
+        const wave =
+            Math.sin(
+                time*.012+
+                p.offset
+            )*.6;
+
+
+        const px =
+            x +
+            Math.cos(p.angle*2)
+            * wave;
+
+
+        const py =
+            y +
+            Math.sin(p.angle*2)
+            * wave;
+
+
+        /*
+           Colores:
+           rosa / magenta / lila / blanco
+        */
+
+        let color;
+
+        const colorChoice =
+            p.hue;
+
+        if(colorChoice < .48){
+
+            color =
+                `rgba(255,${125+Math.floor(Math.random()*45)},${205+Math.floor(Math.random()*35)},`;
+
+        }else if(colorChoice < .78){
+
+            color =
+                `rgba(${210+Math.floor(Math.random()*35)},${95+Math.floor(Math.random()*50)},255,`;
+
+        }else{
+
+            color =
+                `rgba(255,225,248,`;
+
+        }
+
+
+        const twinkle =
+            .55 +
+            .45 *
+            Math.sin(
+                time*.035 +
+                p.twinkle
+            );
+
+
+        ctx.beginPath();
+
+        ctx.fillStyle =
+            color +
+            (
+                p.alpha *
+                twinkle
+            ) +
+            ")";
+
+
+        ctx.shadowBlur =
+            p.size > 1
+            ? 7
+            : 2;
+
+
+        ctx.shadowColor =
+            "#ff55b8";
+
+
+        ctx.arc(
+            px,
+            py,
+            p.size,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fill();
+    }
+
+
+    /*
+       Núcleo luminoso
+    */
+
+    const core =
+        ctx.createRadialGradient(
+            centerX,
+            centerY,
+            0,
+            centerX,
+            centerY,
+            85
+        );
+
+    core.addColorStop(
+        0,
+        "rgba(255,210,241,.85)"
+    );
+
+    core.addColorStop(
+        .12,
+        "rgba(255,112,198,.45)"
+    );
+
+    core.addColorStop(
+        .45,
+        "rgba(255,53,177,.10)"
+    );
+
+    core.addColorStop(
+        1,
+        "transparent"
+    );
+
+    ctx.fillStyle = core;
+
+    ctx.beginPath();
+
+    ctx.arc(
+        centerX,
+        centerY,
+        85,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    ctx.shadowBlur = 0;
+
+    ctx.globalCompositeOperation =
+        "source-over";
+
+
+    requestAnimationFrame(draw);
+}
+
+draw();
+
+
+/* =========================================================
+   MOVIMIENTO DEL MOUSE
+========================================================= */
+
+window.addEventListener(
+    "mousemove",
+    event => {
+
+        mouseX =
+            event.clientX -
+            window.innerWidth/2;
+
+        mouseY =
+            event.clientY -
+            window.innerHeight/2;
+
+        const message =
+            document.getElementById("message");
+
+        message.style.setProperty(
+            "--mx",
+            `${mouseX*.008}px`
+        );
+
+        message.style.setProperty(
+            "--my",
+            `${mouseY*.008}px`
+        );
+    }
+);
+
+
+/* =========================================================
+   MOVIMIENTO EN CELULAR
+========================================================= */
+
+window.addEventListener(
+    "deviceorientation",
+    event => {
+
+        if(event.gamma == null)
+            return;
+
+        mouseX =
+            event.gamma * 5;
+
+        mouseY =
+            event.beta * 2;
+
+        const message =
+            document.getElementById("message");
+
+        message.style.setProperty(
+            "--mx",
+            `${mouseX*.008}px`
+        );
+
+        message.style.setProperty(
+            "--my",
+            `${mouseY*.008}px`
+        );
+    }
+);
+
+</script>
+
+</body>
+  </html>
